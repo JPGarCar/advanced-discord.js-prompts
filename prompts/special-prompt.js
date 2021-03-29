@@ -3,6 +3,8 @@ const { TimeOutError } = require('../errors');
 const { channelMsg, channelMsgWaitDelete, channelMsgDelete } = require('../util/discord-util');
 const MessagePrompt = require('./message-prompt');
 const { PromptInfo } = require('../typedefs');
+const { createPrompt } = require('../util/send-prompt');
+const { validatePromptInfo } = require('../util/prompt-util');
 
 /**
  * Holds special prompts like reactions and boolean prompts.
@@ -17,7 +19,7 @@ class SpecialPrompt {
      * @async
      */
     static async singleReaction(promptInfo) {
-        let reactions = await SpecialPrompt.multiReactionPrompt(promptInfo, 1);
+        let reactions = await SpecialPrompt.multiReaction(promptInfo, 1);
         return reactions.first();
     }
 
@@ -48,12 +50,18 @@ class SpecialPrompt {
      * @async
      */
     static async multiReaction(promptInfo, amount) {
-        let finalPrompt = `${promptInfo.prompt} \n* React to this message with the emojis. \n* You should react with ${amount} different emoji(s).`;
-        let prompt = await channelMsg(promptInfo.channel, promptInfo.userId, finalPrompt);
+        // can not cancel this prompt type
+        promptInfo.cancelable = false;
+
+        promptInfo = validatePromptInfo(promptInfo);
+
+        promptInfo.prompt = `${promptInfo.prompt} \n* React to this message with the emojis. \n* You should react with ${amount} different emoji(s).`;
+        
+        let prompt = await promptInfo.channel.send(createPrompt(promptInfo));
 
         try {
             const filter = (reaction, user) => !user.bot && user.id === promptInfo.userId;
-            var reactions = await prompt.awaitReactions(filter, {max: amount, time: (promptInfo.time ? promptInfo.time : null), errors: ['time']});
+            var reactions = await prompt.awaitReactions(filter, {max: amount, time: (promptInfo.time == Infinity ? null : promptInfo.time), errors: ['time']});
         } catch (error) {
             if (error.name == 'time') {
                 await channelMsgDelete(promptInfo.channel, promptInfo.userId, 'Time is up, please try again once you are ready, we recommend you think of the emoji to use first.', 10);

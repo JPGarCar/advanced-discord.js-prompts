@@ -30,8 +30,7 @@ class NumberPrompt {
      * @async
      */
     static async multi(promptInfo, amount = Infinity) {
-        if (amount != Infinity) promptInfo.prompt = `${promptInfo.prompt} \n* Please write ${amount} number(s) separated by a space.`;
-        let msg = await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.NUMBER);
+        let msg = await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.NUMBER, amount);
 
         let invalid = false;
 

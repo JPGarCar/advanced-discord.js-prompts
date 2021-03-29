@@ -3,6 +3,8 @@ const { TimeOutError } = require('../errors');
 const { channelMsgDelete, channelMsgWaitDelete } = require('../util/discord-util');
 const NumberPrompt = require('./number-prompt');
 const { PromptInfo, PickerOption } = require('../typedefs');
+const { createPrompt } = require('../util/send-prompt');
+const { validatePromptInfo } = require('../util/prompt-util');
 
 /**
  * Holds different list prompts.
@@ -34,9 +36,14 @@ class ListPrompt {
      * @async
      */
     static async multiReactionPicker(promptInfo, options, amount) {
+        // users can not cancel this type of prompt
+        promptInfo = validatePromptInfo(promptInfo);
+        promptInfo.cancelable = false;
+        promptInfo.prompt = `${promptInfo.prompt} \n* React to this message with the emoji to select that option! \n* You should select ${amount} option(s).`;
+
         const embed = new MessageEmbed()
             .setTitle(`Choose ${amount} option(s)!`)
-            .setDescription(`${promptInfo.prompt} \n* React to this message with the emoji to select that option! \n* You should select ${amount} option(s).`);
+            .setDescription(createPrompt(promptInfo));
         
         options.forEach((option, index, list) => embed.addField(`${option.emojiName} - ${option.name}`, option.description));
         
@@ -45,7 +52,7 @@ class ListPrompt {
 
         try {
             const filter = (reaction, user) => !user.bot && user.id === promptInfo.userId && options.find((option) => option.emojiName === reaction.emoji.name);
-            var emojiResponses = await msg.awaitReactions(filter, { max: amount, time: (promptInfo.time ? promptInfo.time : null), errors: ['time'] });
+            var emojiResponses = await msg.awaitReactions(filter, { max: amount, time: (promptInfo.time == Infinity ? null : promptInfo.time), errors: ['time'] });
         } catch (error) {
             if (error.name == 'time') {
                 await channelMsgDelete(promptInfo.channel, promptInfo.userId, 'Time is up, please try again once you are ready.', 10);
@@ -83,6 +90,8 @@ class ListPrompt {
      * @async
      */
     static async multiListChooser(promptInfo, list, amount) {
+        promptInfo = validatePromptInfo(promptInfo);
+
         let text = '';
         list.forEach((value, index) => `\n${index} - ${value.toString()}`);
 

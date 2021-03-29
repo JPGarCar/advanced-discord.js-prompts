@@ -31,8 +31,7 @@ class ChannelPrompt {
      * @async
      */
     static async multi(promptInfo, amount = Infinity) {
-        if (amount != Infinity) promptInfo.prompt = `${promptInfo.prompt} \n* Please mention only ${amount} channel(s).`;
-        let msg = await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.CHANNEL);
+        let msg = await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.CHANNEL, amount);
 
         let channels = msg.mentions.channels;
         if (amount != Infinity && channels.size != amount) {

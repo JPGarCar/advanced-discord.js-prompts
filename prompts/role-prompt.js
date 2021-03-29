@@ -31,8 +31,7 @@ class RolePrompt {
      * @async
      */
     static async multi(promptInfo, amount = Infinity) {
-        if (amount != Infinity) promptInfo.prompt = `${promptInfo.prompt} \n* Please mention only ${amount} roles.`;
-        let msg = await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.MENTION);
+        let msg = await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.MENTION, amount);
 
         let roles = msg.mentions.roles;
         if (amount != Infinity && roles.size != amount) {

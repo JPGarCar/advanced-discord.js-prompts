@@ -32,8 +32,7 @@ class MemberPrompt {
      * @async
      */
     static async multi(promptInfo, amount = Infinity) {
-        if (amount != Infinity) promptInfo.prompt = `${promptInfo.prompt} \n* Please mention only ${amount} members.`;
-        let msg = await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.MENTION);
+        let msg = await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.MENTION, amount);
 
         let members = msg.mentions.members;
         if (amount != Infinity && members.size != amount) {

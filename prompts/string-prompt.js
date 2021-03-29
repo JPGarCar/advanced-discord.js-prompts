@@ -1,6 +1,7 @@
 const MessagePrompt = require('./message-prompt');
 const { channelMsgWaitDelete } = require('../util/discord-util');
 const { PromptInfo } = require('../typedefs');
+const { validatePromptInfo } = require('../util/prompt-util');
 
 /**
  * Holds different String prompts.
@@ -28,6 +29,8 @@ class StringPrompt {
      * @throws {CancelError} if the user cancels the prompt.
      */
     static async restricted(promptInfo, possibleResponses = []) {
+        promptInfo = validatePromptInfo(promptInfo);
+        
         let finalPrompt = `${promptInfo.prompt} \n* Your options are (case sensitive): ${possibleResponses.join(', ')}`;
         
         let response = await StringPrompt.single({prompt: finalPrompt, channel: promptInfo.channel, userId: promptInfo.userId});

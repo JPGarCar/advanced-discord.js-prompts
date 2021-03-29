@@ -2,6 +2,8 @@ const { Message } = require('discord.js');
 const { TimeOutError, CancelError } = require('../errors');
 const { channelMsgDelete } = require('../util/discord-util');
 const { PromptInfo } = require('../typedefs');
+const { createPrompt } = require('../util/send-prompt');
+const { validatePromptInfo } = require('../util/prompt-util');
 
 /**
  * Holds different Discord Message prompts.
@@ -16,16 +18,14 @@ class MessagePrompt {
      * @throws {CancelError} if the user cancels the prompt.
      * @async
      */
-    static async prompt({prompt, channel, userId, time = 0, cancelable = true}) {
-        let finalPrompt = `<@${userId}> ${prompt}`;
-        if (time != 0) finalPrompt = `${finalPrompt} \n* Respond within ${time} seconds.`;
-        finalPrompt = `${finalPrompt} \n* ${cancelable ? 'Write "cancel" to cancel the prompt' : 'You can not cancel this prompt'}.`;
+    static async prompt(promptInfo) {
+        let {prompt, channel, userId, time, cancelable} = validatePromptInfo(promptInfo);
 
-        let promptMsg = await channel.send(`<@${userId}> ${prompt} ${time != 0 ? `\n* Respond within ${time} seconds.` : ""}`);
+        let promptMsg = await channel.send(createPrompt(prompt, channel, userId, time, cancelable));
 
         try {
             const filter = (message) => message.author.id === userId;
-            var msgs = await channel.awaitMessages(filter, {max: 1, time: time == 0 ? null : time * 1000, errors: ['time']});
+            var msgs = await channel.awaitMessages(filter, {max: 1, time: time == Infinity ? null : time * 1000, errors: ['time']});
         } catch (error) {
             if (error.name == 'time') {
                 await channelMsgDelete(channel, userId, 'Time is up, please try again once you are ready, we recommend you write the message first, then react, then send the message.', 10);
@@ -52,12 +52,15 @@ class MessagePrompt {
      * Message prompt with custom prompt message depending on responseType.
      * @param {PromptInfo} promptInfo 
      * @param {InstructionType} instructionType - the type of response, one of string, number, boolean, mention
+     * @param {Number} [amount=Infinity]
      * @returns {Promise<Message>} - the message response to the prompt or false if it timed out!
      * @throws {TimeOutError} if the user does not respond within the given time.
      * @throws {CancelError} if the user cancels the prompt.
      * @async
      */
-    static async instructionPrompt({prompt, channel, userId, time = 0}, instructionType) {
+    static async instructionPrompt(promptInfo, instructionType, amount = Infinity) {
+        promptInfo = validatePromptInfo(promptInfo);
+
         let instruction = '';
 
         switch(instructionType) {
@@ -67,8 +70,9 @@ class MessagePrompt {
             case MessagePrompt.InstructionType.CHANNEL: instruction = 'To mention a channel use "#"! Ex: #banter.';
         }
 
-        let finalPrompt = `${prompt} \n* ${instruction}`;
-        return await MessagePrompt.prompt({finalPrompt, channel, userId, time});
+        promptInfo.prompt = `${promptInfo.prompt} \n* ${instruction}`;
+        if (amount != Infinity) promptInfo.prompt = `${promptInfo.prompt} \n* Please respond with only ${amount}.`
+        return await MessagePrompt.prompt(promptInfo);
     }
 
     /**
