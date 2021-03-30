@@ -4,14 +4,14 @@ const MessagePrompt = require("../../prompts/message-prompt");
 
 describe('Member Prompt Specs', function() {
 
-    var returnMessage;
+    let returnMessage;
 
-    var message = {
+    let message = {
         delete: jasmine.createSpy('messageDelete'),
         author: { id: '0000' },
     };
 
-    var channel = {
+    let channel = {
         type: 'text',
         send: jasmine.createSpy('channelSend').and.callFake(function(text) {
             message.content = text;
@@ -23,10 +23,10 @@ describe('Member Prompt Specs', function() {
     };
 
     /** @type {PromptInfo} */
-    var promptInfo;
+    let promptInfo;
 
     /** @type {jasmine.Spy} */
-    var instructionSpy;
+    let instructionSpy;
 
     beforeEach(function() {
         instructionSpy = spyOn(MessagePrompt, 'instructionPrompt').and.callFake(() => returnMessage);
@@ -38,6 +38,7 @@ describe('Member Prompt Specs', function() {
             deleted: false,
             mentions: {
                 members: new Collection([['item 1', 1]]),
+                channels: new Collection(),
             },
         };
 
