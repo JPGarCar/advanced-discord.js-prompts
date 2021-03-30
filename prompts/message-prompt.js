@@ -2,8 +2,7 @@ const { Message } = require('discord.js');
 const { TimeOutError, CancelError } = require('../errors');
 const { channelMsgDelete } = require('../util/discord-util');
 const { PromptInfo } = require('../typedefs');
-const { createPrompt } = require('../util/send-prompt');
-const { validatePromptInfo } = require('../util/prompt-util');
+const { validatePromptInfo, createPrompt } = require('../util/prompt-util');
 
 /**
  * Holds different Discord Message prompts.
@@ -39,7 +38,7 @@ class MessagePrompt {
 
         let msg = msgs.first();
 
-        if (promptMsg.channel.type != 'dm' && !msg.deleted) await msg.delete();
+        if (msg.channel.type != 'dm' && !msg.deleted) await msg.delete();
 
         if (cancelable && msg.content.toLowerCase() === 'cancel') {
             throw new CancelError();
@@ -64,14 +63,22 @@ class MessagePrompt {
         let instruction = '';
 
         switch(instructionType) {
-            case MessagePrompt.InstructionType.NUMBER: instruction = 'Respond with a number only!';
-            case MessagePrompt.InstructionType.BOOLEAN: instruction = 'Respond with "yes" or "no" only!';
-            case MessagePrompt.InstructionType.MENTION: instruction = 'To mention a user or a role use "@"! Ex: @Hacker or @John.'; 
-            case MessagePrompt.InstructionType.CHANNEL: instruction = 'To mention a channel use "#"! Ex: #banter.';
+            case MessagePrompt.InstructionType.NUMBER: 
+                instruction = 'Respond with a number only!';
+                break;
+            case MessagePrompt.InstructionType.BOOLEAN: 
+                instruction = 'Respond with "yes" or "no" only!';
+                break;
+            case MessagePrompt.InstructionType.MENTION: 
+                instruction = 'To mention a user or a role use "@"! Ex: @Hacker or @John.'; 
+                break;
+            case MessagePrompt.InstructionType.CHANNEL: 
+                instruction = 'To mention a channel use "#"! Ex: #banter.';
+                break;
         }
 
         promptInfo.prompt = `${promptInfo.prompt} \n* ${instruction}`;
-        if (amount != Infinity) promptInfo.prompt = `${promptInfo.prompt} \n* Please respond with only ${amount}.`
+        if (amount != Infinity && instructionType != MessagePrompt.InstructionType.BOOLEAN) promptInfo.prompt = `${promptInfo.prompt} \n* Please respond with only ${amount}.`
         return await MessagePrompt.prompt(promptInfo);
     }
 

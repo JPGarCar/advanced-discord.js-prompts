@@ -27,6 +27,6 @@ function validatePromptInfo(promptInfo) {
     if (!promptInfo?.userId) throw new Error('You must give a prompt the user id to tag the user who must respond.');
     if (!promptInfo?.time) promptInfo.time = Infinity;
     if (!promptInfo?.cancelable) promptInfo.cancelable = false;
-    return promptInfo;
+    return {... promptInfo};
 }
 module.exports.validatePromptInfo = validatePromptInfo;
