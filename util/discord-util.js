@@ -26,7 +26,7 @@ module.exports.channelMsgWaitDelete = channelMsgWaitDelete;
  * @returns {Promise<Message>}
  */
 async function channelMsg(channel, userId, msgText) {
-    return await channel.send(`<@${userId} ${msgText}`);
+    return await channel.send(`<@${userId}> ${msgText}`);
 }
 module.exports.channelMsg = channelMsg;
 
