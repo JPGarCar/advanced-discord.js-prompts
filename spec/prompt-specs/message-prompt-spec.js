@@ -115,8 +115,8 @@ describe('Message Prompt Specs', function() {
             promptSpy = spyOn(MessagePrompt, 'prompt');
         });
 
-        it('works with number', () => {
-            MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.NUMBER);
+        it('works with number', async () => {
+            await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.NUMBER);
             expect(promptSpy).toHaveBeenCalledWith({
                 prompt: `${promptInfo.prompt} \n* Respond with a number only!`,
                 channel: promptInfo.channel,
@@ -126,8 +126,8 @@ describe('Message Prompt Specs', function() {
             });
         });
 
-        it('works with boolean', function() {
-            MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.BOOLEAN);
+        it('works with boolean', async function() {
+            await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.BOOLEAN);
             expect(promptSpy).toHaveBeenCalledWith({
                 prompt: `${promptInfo.prompt} \n* Respond with "yes" or "no" only!`,
                 channel: promptInfo.channel,
@@ -137,8 +137,8 @@ describe('Message Prompt Specs', function() {
             });
         });
 
-        it('works with mention', function() {
-            MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.MENTION);
+        it('works with mention', async function() {
+            await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.MENTION);
             expect(promptSpy).toHaveBeenCalledWith({
                 prompt: `${promptInfo.prompt} \n* To mention a user or a role use "@"! Ex: @Hacker or @John.`,
                 channel: promptInfo.channel,
@@ -148,8 +148,8 @@ describe('Message Prompt Specs', function() {
             });
         });
 
-        it('works with channel', function() {
-            MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.CHANNEL);
+        it('works with channel', async function() {
+            await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.CHANNEL);
             expect(promptSpy).toHaveBeenCalledWith({
                 prompt: `${promptInfo.prompt} \n* To mention a channel use "#"! Ex: #banter.`,
                 channel: promptInfo.channel,
@@ -159,8 +159,8 @@ describe('Message Prompt Specs', function() {
             });
         });
 
-        it('works with channel and amount', function() {
-            MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.CHANNEL, 3);
+        it('works with channel and amount', async function() {
+            await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.CHANNEL, 3);
             expect(promptSpy).toHaveBeenCalledWith({
                 prompt: `${promptInfo.prompt} \n* To mention a channel use "#"! Ex: #banter. \n* Please respond with only 3.`,
                 channel: promptInfo.channel,
@@ -170,8 +170,8 @@ describe('Message Prompt Specs', function() {
             });
         });
 
-        it('works with number and amount', () => {
-            MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.NUMBER, 3);
+        it('works with number and amount', async () => {
+            await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.NUMBER, 3);
             expect(promptSpy).toHaveBeenCalledWith({
                 prompt: `${promptInfo.prompt} \n* Respond with a number only! \n* Please respond with only 3.`,
                 channel: promptInfo.channel,
@@ -181,8 +181,8 @@ describe('Message Prompt Specs', function() {
             });
         });
 
-        it('works with boolean and amount (no amount should show)', function() {
-            MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.BOOLEAN, 3);
+        it('works with boolean and amount (no amount should show)', async function() {
+            await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.BOOLEAN, 3);
             expect(promptSpy).toHaveBeenCalledWith({
                 prompt: `${promptInfo.prompt} \n* Respond with "yes" or "no" only!`,
                 channel: promptInfo.channel,
@@ -191,7 +191,6 @@ describe('Message Prompt Specs', function() {
                 time: Infinity,
             });
         });
-
     });
 
 

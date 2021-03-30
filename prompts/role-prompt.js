@@ -1,6 +1,6 @@
 const { Collection } = require('discord.js');
 const MessagePrompt = require('./message-prompt');
-const { channelMsgWaitDelete } = require('./util/discord-util');
+const { channelMsgWaitDelete } = require('../util/discord-util');
 const { PromptInfo } = require('../typedefs');
 
 /**

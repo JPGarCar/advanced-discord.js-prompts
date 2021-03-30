@@ -3,8 +3,7 @@ const { TimeOutError } = require('../errors');
 const { channelMsgDelete, channelMsgWaitDelete } = require('../util/discord-util');
 const NumberPrompt = require('./number-prompt');
 const { PromptInfo, PickerOption } = require('../typedefs');
-const { createPrompt } = require('../util/send-prompt');
-const { validatePromptInfo } = require('../util/prompt-util');
+const { validatePromptInfo, createPrompt } = require('../util/prompt-util');
 
 /**
  * Holds different list prompts.

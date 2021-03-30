@@ -1,10 +1,9 @@
 const { Collection, MessageReaction } = require('discord.js');
 const { TimeOutError } = require('../errors');
-const { channelMsg, channelMsgWaitDelete, channelMsgDelete } = require('../util/discord-util');
+const { channelMsgWaitDelete, channelMsgDelete } = require('../util/discord-util');
 const MessagePrompt = require('./message-prompt');
 const { PromptInfo } = require('../typedefs');
-const { createPrompt } = require('../util/send-prompt');
-const { validatePromptInfo } = require('../util/prompt-util');
+const { validatePromptInfo, createPrompt } = require('../util/prompt-util');
 
 /**
  * Holds special prompts like reactions and boolean prompts.
