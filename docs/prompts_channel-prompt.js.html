@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Adding meta -->
+    
+
+    <!-- Adding external script-->
+    
+
+    <!-- Adding external style-->
+    
+
+    <!-- Adding scripts-->
+    
+
+    <!-- Adding style-->
+    
+
+    <!-- Adding overlay script-->
+    
+
+    <!-- Adding overlay style-->
+    
+
+
+    <title>
+      prompts/channel-prompt.js
+    </title>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/third-party/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/third-party/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/reset.css">
+    <link type="text/css" rel="stylesheet" href="styles/heading.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-base.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-light.css">
+    
+    <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="display:none">
+    <defs>
+        <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
+            <g>
+                <path
+                    d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z" />
+                <path
+                    d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z" />
+            </g>
+        </symbol>
+        <symbol id='search-icon' viewBox="0 0 512 512">
+            <g>
+                <g>
+                    <path
+                        d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z" />
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path
+                        d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z" />
+                </g>
+            </g>
+        </symbol>
+        <symbol id="down-icon" viewBox="0 0 16 16">
+            <path 
+                fill-rule="evenodd" 
+                clip-rule="evenodd" 
+                d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"
+            >
+            </path>
+        </symbol>
+    </defs>
+</svg>
+  </head>
+
+  <body>
+
+    <nav class="navbar" id="navbar">
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Advanced Discord.js Prompts</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><ul><li class="menu-li"><a href='https://github.com/JPGarCar/advanced-discord.js-prompts' class=' menu-link' id='' target=''>GitHub</a></li><li class="menu-li"><a href='https://www.npmjs.com/package/advanced-discord.js-prompts' class=' menu-link' id='' target=''>NPM</a></li></ul><div class="accordion collapsed" id="7244298" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=5478407><div class="accordion-heading child"><a href="ChannelPrompt.html">ChannelPrompt</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="ChannelPrompt.html#.multi">multi</a></li><li data-type='method'><a href="ChannelPrompt.html#.single">single</a></li></ul></li><li class="accordion collapsed child" id=6751251><div class="accordion-heading child"><a href="ListPrompt.html">ListPrompt</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="ListPrompt.html#.multiListChooser">multiListChooser</a></li><li data-type='method'><a href="ListPrompt.html#.multiReactionPicker">multiReactionPicker</a></li><li data-type='method'><a href="ListPrompt.html#.singleListChooser">singleListChooser</a></li><li data-type='method'><a href="ListPrompt.html#.singleReactionPicker">singleReactionPicker</a></li></ul></li><li class="accordion collapsed child" id=947463><div class="accordion-heading child"><a href="MemberPrompt.html">MemberPrompt</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="MemberPrompt.html#.multi">multi</a></li><li data-type='method'><a href="MemberPrompt.html#.single">single</a></li></ul></li><li class="accordion collapsed child" id=3824982><div class="accordion-heading child"><a href="MessagePrompt.html">MessagePrompt</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="MessagePrompt.html#.instructionPrompt">instructionPrompt</a></li><li data-type='method'><a href="MessagePrompt.html#.prompt">prompt</a></li></ul></li><li class="accordion-list" id=""><a href="module-Errors-CancelError.html">CancelError</a></li><li class="accordion-list" id=""><a href="module-Errors-TimeOutError.html">TimeOutError</a></li><li class="accordion collapsed child" id=5195747><div class="accordion-heading child"><a href="NumberPrompt.html">NumberPrompt</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="NumberPrompt.html#.multi">multi</a></li><li data-type='method'><a href="NumberPrompt.html#.single">single</a></li></ul></li><li class="accordion collapsed child" id=8867429><div class="accordion-heading child"><a href="RolePrompt.html">RolePrompt</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="RolePrompt.html#.multi">multi</a></li><li data-type='method'><a href="RolePrompt.html#.single">single</a></li></ul></li><li class="accordion collapsed child" id=9289231><div class="accordion-heading child"><a href="SpecialPrompt.html">SpecialPrompt</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="SpecialPrompt.html#.boolean">boolean</a></li><li data-type='method'><a href="SpecialPrompt.html#.multiReaction">multiReaction</a></li><li data-type='method'><a href="SpecialPrompt.html#.singleReaction">singleReaction</a></li><li data-type='method'><a href="SpecialPrompt.html#.singleRestrictedReaction">singleRestrictedReaction</a></li></ul></li><li class="accordion collapsed child" id=9597222><div class="accordion-heading child"><a href="StringPrompt.html">StringPrompt</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="StringPrompt.html#.restricted">restricted</a></li><li data-type='method'><a href="StringPrompt.html#.single">single</a></li></ul></li></ul> </div><div class="accordion collapsed" id="3784024" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=6234108><div class="accordion-heading child"><a href="module-DiscordUtils.html">DiscordUtils</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="module-DiscordUtils.html#~channelMsg">channelMsg</a></li><li data-type='method'><a href="module-DiscordUtils.html#~channelMsgDelete">channelMsgDelete</a></li><li data-type='method'><a href="module-DiscordUtils.html#~channelMsgWaitDelete">channelMsgWaitDelete</a></li></ul></li><li class="accordion-list" id=""><a href="module-Errors.html">Errors</a></li><li class="accordion collapsed child" id=3106382><div class="accordion-heading child"><a href="module-PromptUtil.html">PromptUtil</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="module-PromptUtil.html#~createPrompt">createPrompt</a></li><li data-type='method'><a href="module-PromptUtil.html#~validatePromptInfo">validatePromptInfo</a></li></ul></li><li class="accordion-list" id=""><a href="module-Typedefs.html">Typedefs</a></li></ul> </div></div>
+    </nav>
+    <div class="navbar-ham" id="navbar-ham">
+      <div>
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+      </div>
+    </div>
+
+    <div id="main" class="main-content">
+      
+      <h1 id='page-title' class="page-title">
+        prompts/channel-prompt.js
+      </h1>
+      
+
+      
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const { TextChannel, Collection } = require('discord.js');
+const { channelMsgWaitDelete } = require('../util/discord-util');
+const MessagePrompt = require('./message-prompt');
+const { PromptInfo } = require('../typedefs');
+
+/**
+ * Holds different TextChannel prompts.
+ */
+class ChannelPrompt {
+
+    /**
+     * Prompts the user for a text channel.
+     * @param {PromptInfo} promptInfo 
+     * @returns {Promise&lt;TextChannel>}
+     * @throws {TimeOutError} if the user does not respond within the given time.
+     * @throws {CancelError} if the user cancels the prompt.
+     * @async
+     */
+    static async single(promptInfo) {
+        let channels = await ChannelPrompt.multi(promptInfo, 1);
+        return channels.first();
+    }   
+
+    /**
+     * Prompts the user for multiple text channels. Can be set to a specific amount.
+     * @param {PromptInfo} promptInfo 
+     * @param {Number} [amount=Infinity] - amount of channels to prompt for
+     * @returns {Promise&lt;Collection&lt;String, TextChannel>>}
+     * @throws {TimeOutError} if the user does not respond within the given time.
+     * @throws {CancelError} if the user cancels the prompt.
+     * @async
+     */
+    static async multi(promptInfo, amount = Infinity) {
+        let msg = await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.CHANNEL, amount);
+
+        let channels = msg.mentions.channels;
+        if (amount != Infinity &amp;&amp; channels.size != amount) {
+            await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, `You should only mention ${amount} channel(s)! Try again!`);
+            return await ChannelPrompt.multi(promptInfo, amount);
+        } else if (channels.size === 0) {
+            await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, 'You need to mention channels with "@"! Try again!');
+            return await ChannelPrompt.multi(promptInfo, amount);
+        } else {
+            return channels;
+        }
+    }
+}
+module.exports = ChannelPrompt;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    </div>
+
+    <footer class="footer" id="footer">
+      
+    </footer>
+
+    <script src="scripts/third-party/prettify.js"></script>
+    <script src="scripts/third-party/lang-css.js"></script>
+    <script src="scripts/search.js"></script>
+    <script src="scripts/third-party/fuse.js"></script>
+    <script type="text/javascript" src="scripts/misc.js"></script>
+
+    <script>prettyPrint();</script>
+    <script src="scripts/linenumber.js"></script>
+    <script src="scripts/fix-code-block.js"></script>
+    <script src="scripts/fix-navbar.js"></script>
+    <script>
+      var list = [{"title":"ChannelPrompt","link":"<a href=\"ChannelPrompt.html\">ChannelPrompt</a>"},{"title":"ChannelPrompt.multi","link":"<a href=\"ChannelPrompt.html#.multi\">ChannelPrompt.multi &rtrif; undefined</a>"},{"title":"ChannelPrompt.single","link":"<a href=\"ChannelPrompt.html#.single\">ChannelPrompt.single &rtrif; undefined</a>"},{"title":"ListPrompt","link":"<a href=\"ListPrompt.html\">ListPrompt</a>"},{"title":"ListPrompt.multiListChooser","link":"<a href=\"ListPrompt.html#.multiListChooser\">ListPrompt.multiListChooser &rtrif; undefined</a>"},{"title":"ListPrompt.multiReactionPicker","link":"<a href=\"ListPrompt.html#.multiReactionPicker\">ListPrompt.multiReactionPicker &rtrif; undefined</a>"},{"title":"ListPrompt.singleListChooser","link":"<a href=\"ListPrompt.html#.singleListChooser\">ListPrompt.singleListChooser &rtrif; undefined</a>"},{"title":"ListPrompt.singleReactionPicker","link":"<a href=\"ListPrompt.html#.singleReactionPicker\">ListPrompt.singleReactionPicker &rtrif; undefined</a>"},{"title":"MemberPrompt","link":"<a href=\"MemberPrompt.html\">MemberPrompt</a>"},{"title":"MemberPrompt.multi","link":"<a href=\"MemberPrompt.html#.multi\">MemberPrompt.multi &rtrif; undefined</a>"},{"title":"MemberPrompt.single","link":"<a href=\"MemberPrompt.html#.single\">MemberPrompt.single &rtrif; undefined</a>"},{"title":"MessagePrompt","link":"<a href=\"MessagePrompt.html\">MessagePrompt</a>"},{"title":"MessagePrompt.instructionPrompt","link":"<a href=\"MessagePrompt.html#.instructionPrompt\">MessagePrompt.instructionPrompt &rtrif; undefined</a>"},{"title":"MessagePrompt.prompt","link":"<a href=\"MessagePrompt.html#.prompt\">MessagePrompt.prompt &rtrif; undefined</a>"},{"title":"CancelError","link":"<a href=\"module-Errors-CancelError.html\">CancelError</a>"},{"title":"TimeOutError","link":"<a href=\"module-Errors-TimeOutError.html\">TimeOutError</a>"},{"title":"NumberPrompt","link":"<a href=\"NumberPrompt.html\">NumberPrompt</a>"},{"title":"NumberPrompt.multi","link":"<a href=\"NumberPrompt.html#.multi\">NumberPrompt.multi &rtrif; undefined</a>"},{"title":"NumberPrompt.single","link":"<a href=\"NumberPrompt.html#.single\">NumberPrompt.single &rtrif; undefined</a>"},{"title":"RolePrompt","link":"<a href=\"RolePrompt.html\">RolePrompt</a>"},{"title":"RolePrompt.multi","link":"<a href=\"RolePrompt.html#.multi\">RolePrompt.multi &rtrif; undefined</a>"},{"title":"RolePrompt.single","link":"<a href=\"RolePrompt.html#.single\">RolePrompt.single &rtrif; undefined</a>"},{"title":"SpecialPrompt","link":"<a href=\"SpecialPrompt.html\">SpecialPrompt</a>"},{"title":"SpecialPrompt.boolean","link":"<a href=\"SpecialPrompt.html#.boolean\">SpecialPrompt.boolean &rtrif; undefined</a>"},{"title":"SpecialPrompt.multiReaction","link":"<a href=\"SpecialPrompt.html#.multiReaction\">SpecialPrompt.multiReaction &rtrif; undefined</a>"},{"title":"SpecialPrompt.singleReaction","link":"<a href=\"SpecialPrompt.html#.singleReaction\">SpecialPrompt.singleReaction &rtrif; undefined</a>"},{"title":"SpecialPrompt.singleRestrictedReaction","link":"<a href=\"SpecialPrompt.html#.singleRestrictedReaction\">SpecialPrompt.singleRestrictedReaction &rtrif; undefined</a>"},{"title":"StringPrompt","link":"<a href=\"StringPrompt.html\">StringPrompt</a>"},{"title":"StringPrompt.restricted","link":"<a href=\"StringPrompt.html#.restricted\">StringPrompt.restricted &rtrif; undefined</a>"},{"title":"StringPrompt.single","link":"<a href=\"StringPrompt.html#.single\">StringPrompt.single &rtrif; undefined</a>"},{"title":"DiscordUtils","link":"<a href=\"module-DiscordUtils.html\">DiscordUtils</a>"},{"title":"module:DiscordUtils~channelMsg","link":"<a href=\"module-DiscordUtils.html#~channelMsg\">module:DiscordUtils~channelMsg &rtrif; undefined</a>"},{"title":"module:DiscordUtils~channelMsgDelete","link":"<a href=\"module-DiscordUtils.html#~channelMsgDelete\">module:DiscordUtils~channelMsgDelete &rtrif; undefined</a>"},{"title":"module:DiscordUtils~channelMsgWaitDelete","link":"<a href=\"module-DiscordUtils.html#~channelMsgWaitDelete\">module:DiscordUtils~channelMsgWaitDelete &rtrif; undefined</a>"},{"title":"Errors","link":"<a href=\"module-Errors.html\">Errors</a>"},{"title":"PromptUtil","link":"<a href=\"module-PromptUtil.html\">PromptUtil</a>"},{"title":"module:PromptUtil~createPrompt","link":"<a href=\"module-PromptUtil.html#~createPrompt\">module:PromptUtil~createPrompt &rtrif; undefined</a>"},{"title":"module:PromptUtil~validatePromptInfo","link":"<a href=\"module-PromptUtil.html#~validatePromptInfo\">module:PromptUtil~validatePromptInfo &rtrif; undefined</a>"},{"title":"Typedefs","link":"<a href=\"module-Typedefs.html\">Typedefs</a>"}];
+      var options = {"shouldSort":true,"threshold":0.4,"location":0,"distance":100,"maxPatternLength":32,"minMatchCharLength":1}
+        setupSearch(list, options)
+    </script>
+
+    
+
+    
+
+    
+
+
+  </body>
+
+</html>

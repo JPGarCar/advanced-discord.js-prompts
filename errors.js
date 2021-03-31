@@ -1,6 +1,12 @@
 
 /**
+ * The errors used by this package.
+ * @module Errors
+ */
+
+/**
  * The time out error to be used when a prompt times out.
+ * @class
  */
 class TimeOutError extends Error {
     constructor() {
@@ -17,6 +23,7 @@ module.exports.TimeOutError = TimeOutError;
 
 /**
  * The cancel error to be used when a user cancels a prompt.
+ * @class
  */
 class CancelError extends Error {
     constructor() {

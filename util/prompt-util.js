@@ -1,8 +1,13 @@
 const { PromptInfo } = require('../typedefs');
 
 /**
+ * Utility functions for the prompts.
+ * @module PromptUtil
+ */
+
+/**
  * Creates the prompt out of the promptInfo data.
- * @param {PromptInfo} promptInfo 
+ * @param {PromptInfo} promptInfo
  * @returns {Promise<String>}
  */
 function createPrompt({prompt, channel, userId, time = Infinity, cancelable = true}) {

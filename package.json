@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JPGarCar/discord-js-prompts.git"
+    "url": "https://github.com/JPGarCar/advanced-discord.js-prompts"
   },
   "engines": {
     "node": ">=14.15.4"
@@ -19,7 +19,7 @@
     "discord.js-commando"
   ],
   "bugs": {
-    "url": "https://github.com/JPGarCar/discord-js-prompts/issues",
+    "url": "https://github.com/JPGarCar/advanced-discord.js-prompts/issues",
     "email": "juapgarc@gmail.com"
   },
   "author": {
@@ -38,6 +38,7 @@
     "discord.js": "^12.5.1"
   },
   "devDependencies": {
+    "clean-jsdoc-theme": "^3.1.1",
     "jasmine": "^3.7.0"
   }
 }

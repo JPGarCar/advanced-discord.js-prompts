@@ -1,6 +1,7 @@
 const { Message, TextChannel } = require('discord.js');
 
 /**
+ * Utility functions to do common Discord tasks.
  * @module DiscordUtils
  */
 

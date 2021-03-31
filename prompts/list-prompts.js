@@ -69,7 +69,7 @@ class ListPrompt {
     /**
      * Prompts the user with a list of options, the user will select one option by writing down the chosen option index.
      * @param {PromptInfo} promptInfo 
-     * @param {*[]} list 
+     * @param {Array} list 
      * @returns {*} - the item the user chooses
      * @throws {TimeOutError} if the user takes longer than the given time to react
      * @throws {CancelError} if the user cancels the prompt.
@@ -83,9 +83,9 @@ class ListPrompt {
     /**
      * Prompts the user with a list of options, the user will select options by writing down the option's index.
      * @param {PromptInfo} promptInfo 
-     * @param {*[]} list - the items in this list must have a valid toString() function
+     * @param {Array} list - the items in this list must have a valid toString() function
      * @param {Number} amount 
-     * @return {Promise<*[]>} - list of items the user choose
+     * @return {Promise<Array>} - list of items the user choose
      * @throws {TimeOutError} if the user takes longer than the given time to react
      * @throws {CancelError} if the user cancels the prompt.
      * @async
