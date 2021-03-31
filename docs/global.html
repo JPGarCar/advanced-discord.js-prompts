@@ -28,7 +28,7 @@
 
 
     <title>
-      MessagePrompt
+      Global
     </title>
 
     <!--[if lt IE 9]>
@@ -94,7 +94,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        MessagePrompt
+        Global
       </h1>
       
 
@@ -106,70 +106,20 @@
 <section>
 
 
-<header>
-    
-        
-        <h2>
-        
-        MessagePrompt
-        
-        </h2>
-        
-        
-            <div class="class-description">Holds different Discord Message prompts.</div>
-        
-    
-</header>
-
 
 <article>
     <div class="container-overview">
     
         
 
-    
-        <h2>Constructor</h2>
-    
-
-    <h4 class="name" id="MessagePrompt">
-        <a href="#MessagePrompt">#</a>
-        <span class="type-signature"></span>new MessagePrompt<span class="signature">()</span><span class="type-signature"></span>
-    </h4>
-
-    
+        
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     
     </div>
 
@@ -184,71 +134,128 @@
     
 
     
-        <h3 class="subsection-title">Members</h3>
+
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
 
         
-            
-<h4 class="name" id="InstructionType">
-    <a href="#InstructionType">#</a>
-    <span class="type-signature"></span>InstructionType<span class="type-signature"> :Number</span>
+                
+<h4 class="name" id="PickerOption">
+    <a href="#PickerOption">#</a>
+    PickerOption
 </h4>
 
 
 
 
 <div class="description">
-    The instruction types available for a prompt to explain.
+    An option for a list reaction picker prompt.
 </div>
 
 
 
-    <div class="member-item-container flex">
-        <strong>Type: </strong>
-        <ul>
-            <li>
-                
-<span class="param-type">Number</span>
-
-
-            </li>
-        </ul>
-    </div>
 
 
 
 
 
-
-
-
-
-
-
-
-
-        
-    
+    <h5 class="subsection-title">Properties</h5>
 
     
-        <h3 class="subsection-title">Methods</h3>
+<div class="allow-overflow">
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
 
         
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
             
 
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">name of this option</td>
+        </tr>
+
     
 
-    <h4 class="name" id=".instructionPrompt">
-        <a href="#.instructionPrompt">#</a>
-        <span class="type-signature">(async, static) </span>instructionPrompt<span class="signature">(promptInfo, instructionType, amount<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Message>}</span>
-    </h4>
+        <tr>
+            
+                <td class="name"><code>description</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">description for this option</td>
+        </tr>
 
     
 
+        <tr>
+            
+                <td class="name"><code>emojiName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
 
 
-    <div class="description">
-        Message prompt with custom prompt message depending on responseType.
-    </div>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the name of the emoji (only unicode emojis allowed!)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</div>
 
 
 
@@ -258,11 +265,34 @@
 
 
 
-    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Parameters:</strong>
-        
 
-<table class="params">
+
+            
+                
+<h4 class="name" id="PromptInfo">
+    <a href="#PromptInfo">#</a>
+    PromptInfo
+</h4>
+
+
+
+
+<div class="description">
+    Common data for all prompts.
+</div>
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties</h5>
+
+    
+<div class="allow-overflow">
+<table class="props">
     <thead>
     <tr>
         
@@ -288,13 +318,13 @@
 
         <tr>
             
-                <td class="name"><code>promptInfo</code></td>
+                <td class="name"><code>prompt</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#PromptInfo">PromptInfo</a></span>
+<span class="param-type">String</span>
 
 
             
@@ -302,8 +332,6 @@
 
             
                 <td class="attributes">
-                
-
                 
 
                 
@@ -316,20 +344,23 @@
                 </td>
             
 
-            <td class="description last"></td>
+            <td class="description last">the text prompt to send to user</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>instructionType</code></td>
+                <td class="name"><code>channel</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">InstructionType</span>
+<span class="param-type">TextChannel</span>
+|
+
+<span class="param-type">DMChannel</span>
 
 
             
@@ -337,8 +368,6 @@
 
             
                 <td class="attributes">
-                
-
                 
 
                 
@@ -351,14 +380,47 @@
                 </td>
             
 
-            <td class="description last">the type of response, one of string, number, boolean, mention</td>
+            <td class="description last">the channel to send the prompt to</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>amount</code></td>
+                <td class="name"><code>userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">the ID of the user to prompt</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>time</code></td>
             
 
             <td class="type">
@@ -377,8 +439,6 @@
                 
 
                 
-
-                
                 </td>
             
 
@@ -390,315 +450,62 @@
                 </td>
             
 
-            <td class="description last"></td>
+            <td class="description last">the time in seconds to wait for the response, if 0 then wait forever</td>
         </tr>
 
-    
-    </tbody>
-</table>
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Throws:</strong>
-    
-        <ul>
-            
-                <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        if the user does not respond within the given time.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">TimeOutError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-            
-                <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        if the user cancels the prompt.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">CancelError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-            
-        </ul>
-    
-    </div>
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
-<div class="param-desc">
-    - the message response to the prompt or false if it timed out!
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;Message></span>
-
-
-    </dd>
-</dl>
-
-            
-    </div>
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".prompt">
-        <a href="#.prompt">#</a>
-        <span class="type-signature">(async, static) </span>prompt<span class="signature">(promptInfo)</span><span class="type-signature"> &rarr; {Promise.&lt;Message>}</span>
-    </h4>
-
-    
-
-
-
-    <div class="description">
-        Simple message prompt.
-    </div>
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Parameters:</strong>
-        
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>promptInfo</code></td>
+                <td class="name"><code>cancelable</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#PromptInfo">PromptInfo</a></span>
+<span class="param-type">Boolean</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+                </td>
             
 
-            <td class="description last">the common data, prompt, channel, userId</td>
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">if the prompt can be canceled</td>
         </tr>
 
     
     </tbody>
 </table>
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Throws:</strong>
-    
-        <ul>
-            
-                <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        if the user does not respond within the given time.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">TimeOutError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-            
-                <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        if the user cancels the prompt.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">CancelError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-            
-        </ul>
-    
-    </div>
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
-<div class="param-desc">
-    - the message response to the prompt or false if it timed out!
 </div>
 
 
 
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;Message></span>
 
 
-    </dd>
-</dl>
+
+
+
+
+
 
             
-    </div>
-
-
-
-
-        
-    
-
     
 
     
