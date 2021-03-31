@@ -2,7 +2,7 @@ const { Collection } = require("discord.js");
 const MessagePrompt = require("../../prompts/message-prompt");
 const RolePrompt = require("../../prompts/role-prompt");
 
-fdescribe('Role Prompts Specs', function() {
+describe('Role Prompts Specs', function() {
 
     let message2 = {
         delete: jasmine.createSpy('message delete'),
