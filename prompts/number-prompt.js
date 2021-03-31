@@ -10,7 +10,7 @@ class NumberPrompt {
     /**
      * Prompts the user for one number.
      * @param {PromptInfo} promptInfo 
-     * @returns {Number}
+     * @returns {Promise<Number>}
      * @throws {TimeOutError} if the user does not respond within the given time.
      * @throws {CancelError} if the user cancels the prompt.
      * @async
@@ -42,10 +42,10 @@ class NumberPrompt {
             else numbers.push(parseInt(num));
         });
 
-        if (amount != Infinity && numbers.size != amount) {
+        if (amount != Infinity && numbers.length != amount) {
             await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, `You should only write ${amount} number(s)! Try again!`);
             return await NumberPrompt.multi(promptInfo, amount);
-        } else if (numbers.size === 0 || invalid) {
+        } else if (numbers.length === 0 || invalid) {
             await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, 'You need to write numbers only! Try again!');
             return await NumberPrompt.multi(promptInfo, amount);
         } else {
