@@ -107,3 +107,7 @@ Please feel free to add feature request or bug issues on our github. We are cons
 - [ ] add tutorials
 - [ ] add embed support
 - [ ] add optional console logging with winston
+
+## Authors
+[Juan Pablo Garcia](https://github.com/JPGarCar)
+[Maggie Wang](https://github.com/mwang2000)
