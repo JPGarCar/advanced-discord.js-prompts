@@ -17,6 +17,7 @@
     },
     "opts": {
         "destination": "./docs",
+        "tutorials": "./tutorials",
         "recursive": true,
         "access": "all",
         "package": "./package.json",

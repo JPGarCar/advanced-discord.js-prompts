@@ -16,8 +16,13 @@ Prompts are user guided, this means only one user is allowed to respond to the p
 We have Discord.js specific prompts like Member, Channel, Emoji, and Role prompts which will return the Discord.js Objects for easier development.
 ### Advanced List Prompts
 The ListPrompt class has customizable prompts that allow the user to select one or many options out of a list of options. They can be used with anything (Channels, Roles, Text, Numbers)!
+### Fully Tested and 100% Test Coverage
+This package is 100% Test Covered and it is used by other bots we produce!
 
 ## Usage
+### Check our Documentation
+You can take a look at our documentation with tutorials [here!](https://jpgarcar.github.io/advanced-discord.js-prompts/index.html)
+### Basic Tutorial
 1. Install the npm package (add '--production' to not install our unit testing packages)
 ```javascript
 npm install advanced-discord.js-prompts --production
@@ -98,6 +103,7 @@ Prompts the user for emojis or for a yes/no response for boolean values.
 Please feel free to add feature request or bug issues on our github. We are constantly developing this package for our other bots!
 
 ## Future Plans
-- add unit testings
-- add embed support
-- add optional console logging with winston
+- [x] add unit testings
+- [ ] add tutorials
+- [ ] add embed support
+- [ ] add optional console logging with winston
