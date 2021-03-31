@@ -51,7 +51,7 @@ class ListPrompt {
 
         try {
             const filter = (reaction, user) => !user.bot && user.id === promptInfo.userId && options.find((option) => option.emojiName === reaction.emoji.name);
-            var emojiResponses = await msg.awaitReactions(filter, { max: amount, time: (promptInfo.time == Infinity ? null : promptInfo.time), errors: ['time'] });
+            var emojiResponses = await msg.awaitReactions(filter, { max: amount, time: (promptInfo.time == Infinity ? null : promptInfo.time * 1000), errors: ['time'] });
         } catch (error) {
             if (error.name == 'time') {
                 await channelMsgDelete(promptInfo.channel, promptInfo.userId, 'Time is up, please try again once you are ready.', 10);

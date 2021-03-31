@@ -25,12 +25,7 @@ describe('Member Prompt Specs', function() {
     /** @type {PromptInfo} */
     let promptInfo;
 
-    /** @type {jasmine.Spy} */
-    let instructionSpy;
-
     beforeEach(function() {
-        instructionSpy = spyOn(MessagePrompt, 'instructionPrompt').and.callFake(() => returnMessage);
-
         returnMessage = {
             content: 'this is the return message',
             delete: jasmine.createSpy('message return delete'),
@@ -57,24 +52,36 @@ describe('Member Prompt Specs', function() {
 
     describe('multi function', () => {
 
+        /** @type {jasmine.Spy} */
+        let instructionSpy;
+
+        beforeEach(function() {
+            let counter = 0;
+            instructionSpy = spyOn(MessagePrompt, 'instructionPrompt').and.callFake(() => {
+                if (counter === 0) {
+                    counter++;
+                    return returnMessage;
+                } else {
+                    returnMessage.mentions.members = new Collection([['item 1', 1], ['item 2', 2]]);
+                    return returnMessage;
+                }
+            });
+        });
+
         it('calls instruction prompt with mention and amount', async () => {
             await MemberPrompt.multi(promptInfo);
             expect(instructionSpy).toHaveBeenCalledWith(promptInfo, MessagePrompt.InstructionType.MENTION, Infinity);
         });
 
         it('prompts again if size is not equal to amount', async () => {
-            MemberPrompt.multi(promptInfo, 2);
-            await new Promise((resolve) => setTimeout(resolve, 5100));
-            returnMessage.mentions.members = new Collection([['item 1', 1], ['item 2', 2]]);
-            expect(instructionSpy.calls.count()).toBeGreaterThanOrEqual(2);
+            await MemberPrompt.multi(promptInfo, 2);
+            expect(instructionSpy).toHaveBeenCalledTimes(2);
         });
 
         it('prompts again if infinity amount and no members mentioned', async () => {
             returnMessage.mentions.members = new Collection();
-            MemberPrompt.multi(promptInfo);
-            await new Promise((resolve) => setTimeout(resolve, 5100));
-            returnMessage.mentions.members = new Collection([['item 1', 1], ['item 2', 2]]);
-            expect(instructionSpy.calls.count()).toBeGreaterThanOrEqual(2);
+            await MemberPrompt.multi(promptInfo);
+            expect(instructionSpy).toHaveBeenCalledTimes(2);
         });
 
         it('works as expected with ideal params', async () => {

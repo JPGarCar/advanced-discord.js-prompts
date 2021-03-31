@@ -18,9 +18,6 @@ describe('Channel Prompt Specs', function() {
     /** @type {PromptInfo} */
     let promptInfo;
 
-    /** @type {jasmine.Spy} */
-    let instructionSpy;
-
     beforeEach(function() {
         returnMessage = {
             content: 'this is the return message for channel',
@@ -38,14 +35,28 @@ describe('Channel Prompt Specs', function() {
             channel: channel,
         };
 
-        instructionSpy = spyOn(MessagePrompt, 'instructionPrompt').and.callFake(() => returnMessage);
-
         returnMessage.delete.calls.reset();
 
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
     });
 
-    describe('multi functions', () => {
+    describe('multi functions', function() {
+
+            /** @type {jasmine.Spy} */
+            let instructionSpy;
+
+        beforeEach(function() {
+            let counter = 0;
+            instructionSpy = spyOn(MessagePrompt, 'instructionPrompt').and.callFake(() => {
+                if (counter === 0) {
+                    counter++;
+                    return returnMessage;
+                } else {
+                    returnMessage.mentions.channels = new Collection([['item 1', 1], ['item 2', 2]]);
+                    return returnMessage;
+                }
+            });
+        })
 
         it('calls instruction prompt with mention and amount', async () => {
             await ChannelPrompt.multi(promptInfo);
@@ -53,18 +64,14 @@ describe('Channel Prompt Specs', function() {
         });
 
         it('prompts again if size is not equal to amount', async () => {
-            ChannelPrompt.multi(promptInfo, 2);
-            await new Promise((resolve) => setTimeout(resolve, 5100));
-            returnMessage.mentions.channels = new Collection([['item 1', 1], ['item 2', 2]]);
-            expect(instructionSpy.calls.count()).toBeGreaterThanOrEqual(2);
+            await ChannelPrompt.multi(promptInfo, 2);            
+            expect(instructionSpy).toHaveBeenCalledTimes(2);
         });
 
         it('prompts again if infinity amount and no members mentioned', async () => {
             returnMessage.mentions.channels = new Collection();
-            ChannelPrompt.multi(promptInfo);
-            await new Promise((resolve) => setTimeout(resolve, 5100));
-            returnMessage.mentions.channels = new Collection([['item 1', 1], ['item 2', 2]]);
-            expect(instructionSpy.calls.count()).toBeGreaterThanOrEqual(2);
+            await ChannelPrompt.multi(promptInfo);
+            expect(instructionSpy).toHaveBeenCalledTimes(2);
         });
 
         it('works as expected with ideal params', async () => {
@@ -74,10 +81,16 @@ describe('Channel Prompt Specs', function() {
 
     });
 
-    describe('single functions', () => {
+    describe('single functions', function() {
+        
+        /** @type {jasmine.Spy} */
+        let multiSpy;
+
+        beforeEach(function() {
+            multiSpy = spyOn(ChannelPrompt, 'multi').and.callFake(() => returnMessage.mentions.channels);
+        });
 
         it('calls the multi function', async () => {
-            let multiSpy = spyOn(ChannelPrompt, 'multi').and.callFake(() => returnMessage.mentions.channels);
             await ChannelPrompt.single(promptInfo);
             expect(multiSpy).toHaveBeenCalledWith(promptInfo, 1);
         });

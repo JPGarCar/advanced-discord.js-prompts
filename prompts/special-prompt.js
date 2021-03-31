@@ -60,7 +60,7 @@ class SpecialPrompt {
 
         try {
             const filter = (reaction, user) => !user.bot && user.id === promptInfo.userId;
-            var reactions = await prompt.awaitReactions(filter, {max: amount, time: (promptInfo.time == Infinity ? null : promptInfo.time), errors: ['time']});
+            var reactions = await prompt.awaitReactions(filter, {max: amount, time: (promptInfo.time == Infinity ? null : promptInfo.time * 1000), errors: ['time']});
         } catch (error) {
             if (error.name == 'time') {
                 await channelMsgDelete(promptInfo.channel, promptInfo.userId, 'Time is up, please try again once you are ready, we recommend you think of the emoji to use first.', 10);
@@ -86,9 +86,9 @@ class SpecialPrompt {
     static async boolean(promptInfo) {
         let response = await MessagePrompt.instructionPrompt(promptInfo, MessagePrompt.InstructionType.BOOLEAN);
 
-        if (response.cleanContent.toLowerCase() === 'no') return false;
-        else if (response.cleanContent.toLowerCase() === 'yes') return true;
-        else return await SpecialPrompt.booleanPrompt(promptInfo);
+        if (response.cleanContent.toLowerCase().trim() === 'no') return false;
+        else if (response.cleanContent.toLowerCase().trim() === 'yes') return true;
+        else return await SpecialPrompt.boolean(promptInfo);
     }
 
 }

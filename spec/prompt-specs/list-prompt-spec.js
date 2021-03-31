@@ -228,7 +228,7 @@ describe('List Prompt Specs', function() {
                 let returnOptions = await ListPrompt.multiReactionPicker(promptInfo, options, 2);
                 expect(channel.send).toHaveBeenCalled();
                 expect(message2.awaitReactions).toHaveBeenCalledOnceWith(jasmine.any(Function), {
-                    max: 2, time: 10, errors: ['time']
+                    max: 2, time: 10 * 1000, errors: ['time']
                 });
                 expect(message2.react).toHaveBeenCalledTimes(3);
                 expect(message2.delete).toHaveBeenCalledTimes(1);

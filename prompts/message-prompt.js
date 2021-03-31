@@ -40,7 +40,7 @@ class MessagePrompt {
 
         if (msg.channel.type != 'dm' && !msg.deleted) await msg.delete();
 
-        if (cancelable && msg.content.toLowerCase() === 'cancel') {
+        if (cancelable && msg.content.toLowerCase().trim() === 'cancel') {
             throw new CancelError();
         }
 
