@@ -25,22 +25,50 @@ class StringPrompt {
      * The response is case sensitive!
      * @param {PromptInfo} promptInfo 
      * @param {String[]} possibleResponses - list of responses to match the actual response or re-prompt
+     * They must be single strings with no spaces.
+     * @returns {Promise<String>}
      * @throws {TimeOutError} if the user does not respond within the given time.
      * @throws {CancelError} if the user cancels the prompt.
+     * @async
      */
-    static async restricted(promptInfo, possibleResponses = []) {
-        promptInfo = validatePromptInfo(promptInfo);
-        
+    static async restricted(promptInfo, possibleResponses) {
+        let responseList = await StringPrompt.multiRestricted(promptInfo, possibleResponses, 1);
+        return responseList[0];
+    }
+
+    /**
+     * Prompts the user for one or more strings. The strings must be part of the possibleResponses.
+     * @param {PromptInfo} promptInfo 
+     * @param {String[]} possibleResponses - list of valid responses the user can respond with 
+     * They must be single strings with no spaces.
+     * @param {Number} amount - the amount of responses to expect
+     * @return {Promise<String[]>}
+     * @throws {TimeOutError} if the user does not respond within the given time.
+     * @throws {CancelError} if the user cancels the prompt.
+     * @async
+     */
+    static async multiRestricted(promptInfo, possibleResponses, amount) {
         let finalPrompt = `${promptInfo.prompt} \n* Your options are (case sensitive): ${possibleResponses.join(', ')}`;
         
         let response = await StringPrompt.single({prompt: finalPrompt, channel: promptInfo.channel, userId: promptInfo.userId});
 
-        if (!possibleResponses.includes(response)) {
-            await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, 'Try again! You need to respond with one of the options!');
-            return await StringPrompt.restricted(promptInfo, possibleResponses);
+        let responseList = response.split(' ');
+
+        if(responseList.length != amount) {
+            await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, `You have given ${responseList.length} but I expect only ${amount}. Try again!`);
+            return await StringPrompt.multiRestricted(promptInfo, possibleResponses, amount);
+        }
+
+        let returnResponses = possibleResponses.filter(string => responseList.includes(string));
+
+        if (returnResponses.length != amount) {
+            await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, `Try again! You need to respond with ${amount} of the valid options!`);
+            return await StringPrompt.multiRestricted(promptInfo, possibleResponses, amount);
         } else {
-            return response;
+            return returnResponses;
         }
     }
+
+
 }
 module.exports = StringPrompt;

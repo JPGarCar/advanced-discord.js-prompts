@@ -29,13 +29,14 @@ describe('String Prompt Specs', function() {
         });
     });
 
-    describe('restricted', function() {
-        it('calls string single prompt', async () => {
-            let spy = spyOn(StringPrompt, 'single').and.returnValue('option 1');
+    describe('multi restricted', function() {
 
-            let response = await StringPrompt.restricted(promptInfo, ['option 1', 'option 2']);
+        it('calls string single prompt', async () => {
+            let spy = spyOn(StringPrompt, 'single').and.returnValue('option-1');
+
+            let response = await StringPrompt.multiRestricted(promptInfo, ['option-1', 'option-2'], 1);
             expect(spy).toHaveBeenCalledTimes(1);
-            expect(response).toEqual('option 1');
+            expect(response).toEqual(['option-1']);
         });
 
         it('prompts again if response not in options', async () => {
@@ -43,23 +44,34 @@ describe('String Prompt Specs', function() {
             let spy = spyOn(StringPrompt, 'single').and.callFake(() => {
                 if (count === 0) {
                     count++;
-                    return 'not an option';
+                    return 'not-an-option';
                 } else {
-                    return 'option 2';
+                    return 'option-2';
                 }
             });
 
-            let response = await StringPrompt.restricted(promptInfo, ['option 1', 'option 2']);
+            let response = await StringPrompt.multiRestricted(promptInfo, ['option-1', 'option-2'], 1);
             expect(spy).toHaveBeenCalledTimes(2);
-            expect(response).toEqual('option 2');
+            expect(response).toEqual(['option-2']);
         });
 
-        it('returns the correct string', async () => {
-            let spy = spyOn(StringPrompt, 'single').and.returnValue('option 2');
+        it('returns the correct list of strings', async () => {
+            let spy = spyOn(StringPrompt, 'single').and.returnValue('option-2 option-3');
 
-            let response = await StringPrompt.restricted(promptInfo, ['option 1', 'option 2', 'option 3']);
+            let response = await StringPrompt.multiRestricted(promptInfo, ['option-1', 'option-2', 'option-3'], 2);
             expect(spy).toHaveBeenCalledTimes(1);
-            expect(response).toEqual('option 2');
+            expect(response).toEqual(['option-2', 'option-3']);
+        });
+
+    });
+
+    describe('restricted', function() {
+        it('calls the multi restricted function', async () => {
+            let spy = spyOn(StringPrompt, 'multiRestricted').and.returnValue(['option-2']);
+
+            let response = await StringPrompt.restricted(promptInfo, ['option-1', 'option-2']);
+            expect(spy).toHaveBeenCalledOnceWith(promptInfo, ['option-1', 'option-2'], 1);
+            expect(response).toEqual('option-2');
         });
     });
 
