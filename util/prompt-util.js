@@ -10,7 +10,7 @@ const { PromptInfo } = require('../typedefs');
  * @param {PromptInfo} promptInfo
  * @returns {Promise<String>}
  */
-function createPrompt({prompt, channel, userId, time = Infinity, cancelable = true}) {
+function createPrompt({prompt, channel, userId, time = Infinity, cancelable = false}) {
     let finalPrompt = `<@${userId}> ${prompt}`;
     if (time != Infinity) finalPrompt = `${finalPrompt} \n* Respond within ${time} seconds.`;
     finalPrompt = `${finalPrompt} \n* ${cancelable ? 'Write "cancel" to cancel the prompt' : 'You can not cancel this prompt'}.`;

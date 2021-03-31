@@ -11,8 +11,8 @@ const { TextChannel, DMChannel } = require('discord.js');
  * @property {String} prompt - the text prompt to send to user
  * @property {TextChannel | DMChannel} channel - the channel to send the prompt to
  * @property {String} userId - the ID of the user to prompt
- * @property {Number} [time=0] - the time in seconds to wait for the response, if 0 then wait forever
- * @property {Boolean} [cancelable=true] - if the prompt can be canceled
+ * @property {Number} [time=Infinity] - the time in seconds to wait for the response, if 0 then wait forever
+ * @property {Boolean} [cancelable=false] - if the prompt can be canceled
  */
 
 /**
