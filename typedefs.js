@@ -22,5 +22,3 @@ const { TextChannel, DMChannel } = require('discord.js');
  * @property {String} description - description for this option
  * @property {String} emojiName - the name of the emoji (only unicode emojis allowed!)
  */
-
- module.exports.test = '';

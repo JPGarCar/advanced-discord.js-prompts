@@ -11,4 +11,5 @@ module.exports = {
     StringPrompt: require('./prompts/string-prompt'),
     TimeOutError: require('./errors').TimeOutError,
     CancelError: require('./errors').CancelError,
+    TypeDefs: require('./typedefs'),
 };
