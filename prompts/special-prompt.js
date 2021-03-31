@@ -33,7 +33,7 @@ class SpecialPrompt {
     static async singleRestrictedReaction(promptInfo, unavailableEmojis) {
         let reaction = await SpecialPrompt.singleReaction(promptInfo);
         if (unavailableEmojis.has(reaction.emoji.name)) {
-            channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, 'That emoji is already in use! Select another emoji!');
+            await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, 'That emoji is already in use! Select another emoji!');
             return await SpecialPrompt.singleRestrictedReaction(promptInfo, unavailableEmojis);
         } else {
             return reaction;

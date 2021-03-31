@@ -46,7 +46,7 @@ class ListPrompt {
         
         options.forEach((option, index, list) => embed.addField(`${option.emojiName} - ${option.name}`, option.description));
         
-        const msg = await promptInfo.channel.send(`<@${promptInfo.userId}>`, { embed: embed});
+        const msg = await promptInfo.channel.send(`<@${promptInfo.userId}>`, { embed: embed });
         options.forEach((option, index, list) => msg.react(option.emojiName));
 
         try {
@@ -72,6 +72,7 @@ class ListPrompt {
      * @param {*[]} list 
      * @returns {*} - the item the user chooses
      * @throws {TimeOutError} if the user takes longer than the given time to react
+     * @throws {CancelError} if the user cancels the prompt.
      * @async
      */
     static async singleListChooser(promptInfo, list) {
@@ -86,6 +87,7 @@ class ListPrompt {
      * @param {Number} amount 
      * @return {Promise<*[]>} - list of items the user choose
      * @throws {TimeOutError} if the user takes longer than the given time to react
+     * @throws {CancelError} if the user cancels the prompt.
      * @async
      */
     static async multiListChooser(promptInfo, list, amount) {
@@ -99,21 +101,27 @@ class ListPrompt {
             .setDescription(`${promptInfo.prompt} ${text}`);
         let msg = await promptInfo.channel.send(`<@${promptInfo.userId}>`, { embed: embed });
 
-        let numbers = await NumberPrompt.multi({ 
-            prompt: 'Please write down the option numbers you would like to choose.', 
-            channel: promptInfo.channel, 
-            userId: promptInfo.userId,
-            time: promptInfo.time,
-            cancelable: false,
-        }, amount);
+        let finalList = [];
 
-        let finalList = list.filter((value, index, list) => numbers.includes(index));
-
-        if (finalList.length != amount) {
-            channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, `You need to respond with ${amount} valid number(s).`);
-        } else {
-            return finalList;
+        try {
+            while(finalList.length != amount) {
+                let numbers = await NumberPrompt.multi({ 
+                    prompt: 'Please write down the option numbers you would like to choose.', 
+                    channel: promptInfo.channel, 
+                    userId: promptInfo.userId,
+                    time: promptInfo.time,
+                    cancelable: promptInfo.cancelable,
+                }, amount);
+        
+                finalList = list.filter((value, index, list) => numbers.includes(index));
+                if (finalList.length != amount) {
+                    await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, `You need to respond with ${amount} valid number(s).`);
+                }
+            }
+        } finally {
+            msg.delete();
         }
+        return finalList;
     }
 }
 module.exports = ListPrompt;

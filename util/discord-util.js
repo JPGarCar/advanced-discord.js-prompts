@@ -9,9 +9,9 @@ const { Message, TextChannel } = require('discord.js');
  * @param {TextChannel} channel 
  * @param {String} userId 
  * @param {String} msgText 
- * @param {Number} [waitTime=5] - amount of time to wait in seconds
+ * @param {Number} [waitTime=3] - amount of time to wait in seconds
  */
-async function channelMsgWaitDelete(channel, userId, msgText, waitTime = 5) {
+async function channelMsgWaitDelete(channel, userId, msgText, waitTime = 3) {
     let msg = await channelMsg(channel, userId, msgText);
     await new Promise((resolve) => setTimeout(resolve, waitTime * 1000));
     await msg.delete();
