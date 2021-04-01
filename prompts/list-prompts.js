@@ -94,7 +94,7 @@ class ListPrompt {
         promptInfo = validatePromptInfo(promptInfo);
 
         let text = '';
-        list.forEach((value, index) => `\n${index} - ${value.toString()}`);
+        list.forEach((value, index) => text.concat([`\n${index} - ${value.toString()}`]));
 
         const embed = new MessageEmbed()
             .setTitle(`Select ${amount} option(s)!`)
