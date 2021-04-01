@@ -20,7 +20,7 @@ class MessagePrompt {
     static async prompt(promptInfo) {
         let {prompt, channel, userId, time, cancelable} = validatePromptInfo(promptInfo);
 
-        let promptMsg = await channel.send(createPrompt(prompt, channel, userId, time, cancelable));
+        let promptMsg = await channel.send(createPrompt({prompt, channel, userId, time, cancelable}));
 
         try {
             const filter = (message) => message.author.id === userId;
