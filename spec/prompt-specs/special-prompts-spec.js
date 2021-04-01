@@ -33,6 +33,15 @@ describe('Special Prompts Specs', function() {
             message2.delete.calls.reset();
         });
 
+        describe('single restricted emoji', function() {
+            it('calls the single restricted reaction and returns emoji', async () => {
+                let spy = spyOn(SpecialPrompt, 'singleRestrictedReaction').and.returnValue({ emoji: 'emoji' });
+                let emoji = await SpecialPrompt.singleRestrictedEmoji(promptInfo, new Collection());
+                expect(spy).toHaveBeenCalledOnceWith(promptInfo, new Collection());
+                expect(emoji).toEqual('emoji');
+            });
+        });
+
         describe('single emoji', function() {
             it('calls single reaction and returns emoji', async () => {
                 let spy = spyOn(SpecialPrompt, 'singleReaction').and.returnValue({ emoji: 'emoji' });

@@ -14,9 +14,21 @@ class SpecialPrompt {
      * Returns the emoji from a single reaction prompt.
      * @param {PromptInfo} promptInfo 
      * @returns {Promise<GuildEmoji | ReactionEmoji>}
+     * @throws {TimeOutError} if the user takes longer than the given time to react
      */
     static async singleEmoji(promptInfo) {
         return (await SpecialPrompt.singleReaction(promptInfo)).emoji;
+    }
+
+    /**
+     * Returns the emoji from a single restricted reaction prompt.
+     * @param {PromptInfo} promptInfo 
+     * @param {Collection<String, *>} unavailableEmojis - <Emoji Name, any> the emojis the user can not choose!
+     * @returns {Promise<GuildEmoji | ReactionEmoji>}
+     * @throws {TimeOutError} if the user takes longer than the given time to react
+     */
+    static async singleRestrictedEmoji(promptInfo, unavailableEmojis) {
+        return (await SpecialPrompt.singleRestrictedReaction(promptInfo, unavailableEmojis)).emoji;
     }
 
     /**
@@ -32,7 +44,7 @@ class SpecialPrompt {
     }
 
     /**
-     * Prompts the use for an emoji. If the emoji is part of the unavailable emojis, they will be re-prompted.
+     * Prompts the user for an emoji. If the emoji is part of the unavailable emojis, they will be re-prompted.
      * @param {PromptInfo} promptInfo 
      * @param {Collection<String, *>} unavailableEmojis - <Emoji Name, any> the emojis the user can not choose!
      * @returns {Promise<MessageReaction>}
