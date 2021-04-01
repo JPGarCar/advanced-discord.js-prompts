@@ -41,20 +41,21 @@ class StringPrompt {
      * @param {PromptInfo} promptInfo 
      * @param {String[]} possibleResponses - list of valid responses the user can respond with 
      * They must be single strings with no spaces.
-     * @param {Number} amount - the amount of responses to expect
+     * @param {Number} [amount=Infinity] - the amount of responses to expect
      * @return {Promise<String[]>}
      * @throws {TimeOutError} if the user does not respond within the given time.
      * @throws {CancelError} if the user cancels the prompt.
      * @async
      */
-    static async multiRestricted(promptInfo, possibleResponses, amount) {
+    static async multiRestricted(promptInfo, possibleResponses, amount = Infinity) {
         let finalPrompt = `${promptInfo.prompt} \n* Your options are (case sensitive): ${possibleResponses.join(', ')}`;
-        
+        if (amount != Infinity) finalPrompt = `${finalPrompt} \n* Please respond with only ${amount}.`;
+
         let response = await StringPrompt.single({prompt: finalPrompt, channel: promptInfo.channel, userId: promptInfo.userId});
 
         let responseList = response.split(' ');
 
-        if(responseList.length != amount) {
+        if(amount != Infinity && responseList.length != amount) {
             await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, `You have given ${responseList.length} but I expect only ${amount}. Try again!`);
             return await StringPrompt.multiRestricted(promptInfo, possibleResponses, amount);
         }

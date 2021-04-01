@@ -50,7 +50,7 @@ class MessagePrompt {
     /**
      * Message prompt with custom prompt message depending on responseType.
      * @param {PromptInfo} promptInfo 
-     * @param {InstructionType} instructionType - the type of response, one of string, number, boolean, mention
+     * @param {InstructionType} [instructionType] - the type of response, one of string, number, boolean, mention
      * @param {Number} [amount=Infinity]
      * @returns {Promise<Message>} - the message response to the prompt or false if it timed out!
      * @throws {TimeOutError} if the user does not respond within the given time.
@@ -75,10 +75,13 @@ class MessagePrompt {
             case MessagePrompt.InstructionType.CHANNEL: 
                 instruction = 'To mention a channel use "#"! Ex: #banter.';
                 break;
+            default:
+                instruction = 'Write your response!'
+                break;
         }
 
         promptInfo.prompt = `${promptInfo.prompt} \n* ${instruction}`;
-        if (amount != Infinity && instructionType != MessagePrompt.InstructionType.BOOLEAN) promptInfo.prompt = `${promptInfo.prompt} \n* Please respond with only ${amount}.`
+        if (amount != Infinity && instructionType != MessagePrompt.InstructionType.BOOLEAN) promptInfo.prompt = `${promptInfo.prompt} \n* Please respond with only ${amount}.`;
         return await MessagePrompt.prompt(promptInfo);
     }
 
