@@ -1,6 +1,6 @@
 {
   "name": "advanced-discord.js-prompts",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "An advanced list of prompts available to developers to create Discord bots with Discord.js",
   "main": "index.js",
   "repository": {
