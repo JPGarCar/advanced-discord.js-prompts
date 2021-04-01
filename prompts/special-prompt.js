@@ -1,4 +1,4 @@
-const { Collection, MessageReaction } = require('discord.js');
+const { Collection, MessageReaction, GuildEmoji, ReactionEmoji } = require('discord.js');
 const { TimeOutError } = require('../errors');
 const { channelMsgWaitDelete, channelMsgDelete } = require('../util/discord-util');
 const MessagePrompt = require('./message-prompt');
@@ -9,6 +9,15 @@ const { validatePromptInfo, createPrompt } = require('../util/prompt-util');
  * Holds special prompts like reactions and boolean prompts.
  */
 class SpecialPrompt {
+
+    /**
+     * Returns the emoji from a single reaction prompt.
+     * @param {PromptInfo} promptInfo 
+     * @returns {Promise<GuildEmoji | ReactionEmoji>}
+     */
+    static async singleEmoji(promptInfo) {
+        return (await SpecialPrompt.singleReaction(promptInfo)).emoji;
+    }
 
     /**
      * Prompts the user for one emoji by reacting to a message.
