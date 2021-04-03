@@ -28,7 +28,7 @@
 
 
     <title>
-      RolePrompt
+      prompts/restricted-prompt.js
     </title>
 
     <!--[if lt IE 9]>
@@ -94,7 +94,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        RolePrompt
+        prompts/restricted-prompt.js
       </h1>
       
 
@@ -102,522 +102,59 @@
 
 
 
-
-<section>
-
-
-<header>
     
-        
-        <h2>
-        
-        RolePrompt
-        
-        </h2>
-        
-        
-            <div class="class-description">Holds different role prompts.</div>
-        
-    
-</header>
-
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-        <h2>Constructor</h2>
-    
-
-    <h4 class="name" id="RolePrompt">
-        <a href="#RolePrompt">#</a>
-        <span class="type-signature"></span>new RolePrompt<span class="signature">()</span><span class="type-signature"></span>
-    </h4>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id=".multi">
-        <a href="#.multi">#</a>
-        <span class="type-signature">(async, static) </span>multi<span class="signature">(promptInfo, amount<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Collection.&lt;String, Role>>}</span>
-    </h4>
-
-    
-
-
-
-    <div class="description">
-        Prompts the user for multiple roles, can be set to an exact amount.
-    </div>
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Parameters:</strong>
-        
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>promptInfo</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#PromptInfo">PromptInfo</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>amount</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    Infinity
-                
-                </td>
-            
-
-            <td class="description last">the amount of roles to prompt for</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Throws:</strong>
-    
-        <ul>
-            
-                <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        if the user does not respond within the given time.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">TimeOutError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-            
-                <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        if the user cancels the prompt.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">CancelError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-            
-        </ul>
-    
-    </div>
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;Collection.&lt;String, Role>></span>
-
-
-    </dd>
-</dl>
-
-            
-    </div>
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".single">
-        <a href="#.single">#</a>
-        <span class="type-signature">(async, static) </span>single<span class="signature">(promptInfo)</span><span class="type-signature"> &rarr; {Promise.&lt;Role>}</span>
-    </h4>
-
-    
-
-
-
-    <div class="description">
-        Prompts the user for a role.
-    </div>
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Parameters:</strong>
-        
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>promptInfo</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#PromptInfo">PromptInfo</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Throws:</strong>
-    
-        <ul>
-            
-                <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        if the user does not respond within the given time.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">TimeOutError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-            
-                <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        if the user cancels the prompt.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">CancelError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-            
-        </ul>
-    
-    </div>
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;Role></span>
-
-
-    </dd>
-</dl>
-
-            
-    </div>
-
-
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const { GuildMember, Role, TextChannel } = require('discord.js');
+const { PromptInfo } = require('../typedefs');
+const { channelMsgWaitDelete } = require('../util/discord-util');
+const ChannelPrompt = require('./channel-prompt');
+const MemberPrompt = require('./member-prompt');
+const RolePrompt = require('./role-prompt');
+
+/**
+ * The RestrictedPrompt class allows users to add the restricted feature to any prompt.
+ * This is useful for when developers want the response not to be something, and would 
+ * like the bot to re-prompt until we get a clean response.
+ */
+class RestrictedPrompt {
+
+    /**
+     * Re-prompt the user until their response is not part of the unavailableList.
+     * Will add the unavailable options to the prompt.
+     * @param {ChannelPrompt.single | RolePrompt.single | MemberPrompt.single} promptFunction 
+     * @param {PromptInfo} promptInfo 
+     * @param {TextChannel[] | Role[] | GuildMember[]} unavailableList - list the response can not be
+     * @returns {Promise&lt;TextChannel | Role | GuildMember>}
+     * @throws Error if the list item type does not match the return item from the prompt function.
+     * @throws {TimeOutError} if the user does not respond within the given time.
+     * @throws {CancelError} if the user cancels the prompt.
+     * @async
+     */
+    static async single(promptFunction, promptInfo, unavailableList) {
+        let response = await promptFunction({
+            prompt: `${promptInfo.prompt} \n Unavailable responses: ${unavailableList.join(', ')}`,
+            channel: promptInfo.channel,
+            userId: promptInfo.userId,
+            time: promptInfo.time,
+            cancelable: promptInfo.cancelable,
+        });
+
+        // throw error if list items do not match response item
+        if (response.constructor.name != unavailableList[0].constructor.name) throw new Error('List and response items do not match!');
+
+        if (unavailableList.includes(response)) {
+            await channelMsgWaitDelete(promptInfo.channel, promptInfo.userId, 'The response is not valid please try again!');
+            return await RestrictedPrompt.single(promptFunction, promptInfo, unavailableList);
+        } else {
+            return response;
+        }
+    }
+
+}
+module.exports = RestrictedPrompt;</code></pre>
+        </article>
+    </section>
 
 
 
