@@ -27,6 +27,7 @@ module.exports = {
     RolePrompt: require('./prompts/role-prompt'),
     SpecialPrompt: require('./prompts/special-prompt'),
     StringPrompt: require('./prompts/string-prompt'),
+    RestrictedPrompt: require('./prompts/restricted-prompt'),
     TimeOutError: require('./errors').TimeOutError,
     CancelError: require('./errors').CancelError,
     TypeDefs: require('./typedefs'),
