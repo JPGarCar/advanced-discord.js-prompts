@@ -103,7 +103,14 @@ describe('List Prompt Specs', function() {
         });
 
         it('works with a list of channels', async () => {
-            let client = new Client();
+            let client = new Client({
+                intents:[
+                    'GUILDS',
+                    'GUILD_MESSAGES',
+                    'GUILD_MESSAGE_REACTIONS',
+                    'GUILD_PRESENCES'
+                ]
+            });
             let channel1 = new Channel(client, {
                 name: 'text-1',
                 type: 'text',
@@ -125,7 +132,14 @@ describe('List Prompt Specs', function() {
         });
 
         it('works with a list of roles', async () => {
-            let client = new Client();
+            let client = new Client({
+                intents:[
+                    'GUILDS',
+                    'GUILD_MESSAGES',
+                    'GUILD_MESSAGE_REACTIONS',
+                    'GUILD_PRESENCES'
+                ]
+            });
             let guild = new Guild(client, { name: 'Guild 1', id: '0001'});
             let role1 = new Role(client, {
                 name: 'role 1',
@@ -141,7 +155,14 @@ describe('List Prompt Specs', function() {
         });
 
         it('works with a list of members', async () => {
-            let client = new Client();
+            let client = new Client({
+                intents:[
+                    'GUILDS',
+                    'GUILD_MESSAGES',
+                    'GUILD_MESSAGE_REACTIONS',
+                    'GUILD_PRESENCES'
+                ]
+            });
             let guild = new Guild(client, { name: 'Guild 1', id: '0001'});
             let member1 = new GuildMember(client, { id: '0001', user: { id: '0001' } }, guild);
             let member2 = new GuildMember(client, { id: '0002', user: { id: '0002' } }, guild);

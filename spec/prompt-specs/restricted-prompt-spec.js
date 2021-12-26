@@ -30,7 +30,14 @@ describe('Restricted Prompt Specs', function() {
             };
         });
 
-        let client = new Client()
+        let client = new Client({
+            intents:[
+                'GUILDS',
+                'GUILD_MESSAGES',
+                'GUILD_MESSAGE_REACTIONS',
+                'GUILD_PRESENCES'
+            ]
+        });
         let guild = new Guild(client, { id: '0000' });
         let role1 = new Role(client, { id: '0001' }, guild);
         let role2 = new Role(client, { id: '0002' }, guild);
