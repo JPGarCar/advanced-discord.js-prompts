@@ -5,8 +5,8 @@ declare module 'advanced-discord.js-prompts' {
         prompt: string;
         channel: TextChannel | DMChannel;
         userId: string;
-        time: number;
-        cancelable: boolean;
+        time?: number;
+        cancelable?: boolean;
     }
 
     export interface PickerOption {
